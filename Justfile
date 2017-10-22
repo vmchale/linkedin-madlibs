@@ -10,5 +10,8 @@ script:
     cd .shake && ghc -O2 shake.hs -o shake
     @mv .shake/shake .
 
+deploy: build
+    cp target/* ~/programming/rust/nessa-site/static/linkedin/
+
 view: build
     firefox-trunk target/index.html
