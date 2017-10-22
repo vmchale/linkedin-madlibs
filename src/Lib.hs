@@ -52,7 +52,7 @@ buttonTraits :: [Attribute action]
 buttonTraits = class_ "button" : buttonFont
 
 fontStyles :: [Attribute action]
-fontStyles = [ style_ $ M.fromList [("font", "30px \"Comic Sans MS\", Helvetica, sans-serif")] ]
+fontStyles = [ style_ $ M.fromList [("font", "26px \"Comic Sans MS\", Helvetica, sans-serif")] ]
 
 updateModel :: Action -> Model -> Effect Action Model
 updateModel Regenerate m = m <# fmap Write randomText

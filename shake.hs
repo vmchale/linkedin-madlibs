@@ -37,7 +37,7 @@ main = shakeArgs shakeOptions { shakeFiles = ".shake", shakeLint = Just LintBasi
 
     "purge" ~> do
         putNormal "purging local files..."
-        unit $ cmd ["rm", "-rf", "tags", "shake"]
+        unit $ cmd ["rm", "-rf", "tags", "shake", "mad-src/tags"]
         removeFilesAfter ".stack-work" ["//*"]
         removeFilesAfter ".shake" ["//*"]
         removeFilesAfter "target" ["//*"]
