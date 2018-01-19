@@ -7,19 +7,15 @@ module Lib
     ) where
 
 
-import           Data.FileEmbed (embedStringFile)
-import qualified Data.Map       as M
-import qualified Data.Set       as S
-import           Data.Text      (Text)
+import qualified Data.Map     as M
+import qualified Data.Set     as S
+import           Data.Text    (Text)
 import           Miso
 import           Miso.String
-import           Text.Madlibs   (runText)
-
-sourceFile :: Text
-sourceFile = $(embedStringFile "mad-src/linkedin-madlibs.mad")
+import           Text.Madlibs (madFile, run)
 
 randomText :: IO Text
-randomText = runText [] "noSrc" sourceFile
+randomText = run $(madFile "mad-src/linkedin-madlibs.mad")
 
 type Model = Text
 
@@ -38,6 +34,7 @@ exec = startApp App {..}
     view   = viewModel
     events = defaultEvents
     subs   = [ keyboardSub keypress ]
+    mountPoint = Nothing
 
 backgroundStyle :: [Attribute action]
 backgroundStyle = [ style_ $ M.fromList [("color", "#4d4d4d"), ("margin-left", "15%"), ("margin-top", "15%") ] ]

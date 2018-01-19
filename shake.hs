@@ -47,7 +47,7 @@ main = shakeArgs shakeOptions { shakeFiles = ".shake", shakeLint = Just LintBasi
 
     ".stack-work/dist/x86_64-linux/Cabal-1.24.2.0_ghcjs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js" %> \out -> do
         need ["src/Lib.hs","linkedin-madlibs.cabal","stack.yaml","mad-src/linkedin-madlibs.mad"]
-        unit $ cmd ["bash", "-c", "madlang debug mad-src/linkedin-madlibs.mad > /dev/null"]
+        unit $ cmd ["bash", "-c", "madlang check mad-src/linkedin-madlibs.mad > /dev/null"]
         cmd ["stack", "build", "--stack-yaml", "stack.yaml", "--install-ghc"]
 
     ".stack-work/dist/x86_64-linux/Cabal-1.24.2.0_ghcjs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js" %> \out -> do
