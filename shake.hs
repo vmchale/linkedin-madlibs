@@ -38,15 +38,13 @@ main = shakeArgs shakeOptions { shakeFiles = ".shake", shakeLint = Just LintBasi
     "purge" ~> do
         putNormal "purging local files..."
         unit $ cmd ["rm", "-rf", "tags", "shake", "mad-src/tags"]
-        removeFilesAfter ".stack-work" ["//*"]
+        removeFilesAfter "dist" ["//*"]
+        removeFilesAfter "dist-newstyle" ["//*"]
         removeFilesAfter ".shake" ["//*"]
         removeFilesAfter "target" ["//*"]
 
-    "stack.yaml" %> \_ -> do
-        cmd ["yamllint", "stack.yaml"]
-
     "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js" %> \out -> do
-        need ["src/Lib.hs","linkedin-madlibs.cabal","stack.yaml","mad-src/linkedin-madlibs.mad"]
+        need ["src/Lib.hs","linkedin-madlibs.cabal","cabal.project.local","mad-src/linkedin-madlibs.mad"]
         unit $ cmd ["bash", "-c", "madlang check mad-src/linkedin-madlibs.mad > /dev/null"]
         cmd ["cabal", "new-build"]
 
