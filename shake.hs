@@ -45,18 +45,18 @@ main = shakeArgs shakeOptions { shakeFiles = ".shake", shakeLint = Just LintBasi
     "stack.yaml" %> \_ -> do
         cmd ["yamllint", "stack.yaml"]
 
-    ".stack-work/dist/x86_64-linux/Cabal-1.24.2.0_ghcjs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js" %> \out -> do
+    "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js" %> \out -> do
         need ["src/Lib.hs","linkedin-madlibs.cabal","stack.yaml","mad-src/linkedin-madlibs.mad"]
         unit $ cmd ["bash", "-c", "madlang check mad-src/linkedin-madlibs.mad > /dev/null"]
-        cmd ["stack", "build", "--stack-yaml", "stack.yaml", "--install-ghc"]
+        cmd ["cabal", "new-build"]
 
-    ".stack-work/dist/x86_64-linux/Cabal-1.24.2.0_ghcjs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js" %> \out -> do
-        need [".stack-work/dist/x86_64-linux/Cabal-1.24.2.0_ghcjs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js"]
-        cmd (Cwd ".stack-work/dist/x86_64-linux/Cabal-1.24.2.0_ghcjs/build/linkedin-madlibs/linkedin-madlibs.jsexe/") Shell "ccjs all.js --externs=node --externs=all.js.externs > all.min.js"
+    "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js" %> \out -> do
+        need ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js"]
+        cmd (Cwd "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe") Shell "ccjs all.js --externs=node --externs=all.js.externs > all.min.js"
 
     "target/all.min.js" %> \out -> do
-        need [".stack-work/dist/x86_64-linux/Cabal-1.24.2.0_ghcjs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js"]
-        cmd Shell "cp .stack-work/dist/x86_64-linux/Cabal-1.24.2.0_ghcjs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js target/all.min.js"
+        need ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js"]
+        cmd Shell "cp dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js target/all.min.js"
 
     "target/styles.css" %> \out -> do
         liftIO $ createDirectoryIfMissing True "target"
