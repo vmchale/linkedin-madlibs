@@ -1,24 +1,26 @@
 import           Data.Maybe
 import           Data.Monoid
 import           Development.Shake
+import           Development.Shake.ClosureCompiler
 import           Development.Shake.Command
 import           Development.Shake.FilePath
 import           Development.Shake.Util
 import           System.Directory
-import qualified System.IO.Strict           as Strict
+import qualified System.IO.Strict                  as Strict
 
 main :: IO ()
 main = shakeArgs shakeOptions { shakeFiles = ".shake", shakeLint = Just LintBasic } $ do
     want [ "target/index.html", "README.md" ]
 
-    "sample" ~> do
+    "sample" ~>
         cmd ["madlang", "run", "mad-src/linkedin-madlibs.mad", "-r57"]
 
     "clean" ~> do
         putNormal "cleaning files..."
         unit $ cmd ["rm", "-rf", "tags"]
         removeFilesAfter "target" ["//*"]
-        cmd ["stack", "clean"]
+        removeFilesAfter "dist" ["//*"]
+        removeFilesAfter "dist-newstyle" ["//*"]
 
     "README.md" %> \out -> do
         hs <- getDirectoryFiles "" ["src//*.hs"]
@@ -43,14 +45,12 @@ main = shakeArgs shakeOptions { shakeFiles = ".shake", shakeLint = Just LintBasi
         removeFilesAfter ".shake" ["//*"]
         removeFilesAfter "target" ["//*"]
 
-    "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js" %> \out -> do
+    ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js.externs", "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js"] &%> \[out, _] -> do
         need ["src/Lib.hs","linkedin-madlibs.cabal","cabal.project.local","mad-src/linkedin-madlibs.mad"]
         unit $ cmd ["bash", "-c", "madlang check mad-src/linkedin-madlibs.mad > /dev/null"]
         cmd ["cabal", "new-build"]
 
-    "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js" %> \out -> do
-        need ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js"]
-        cmd (Cwd "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe") Shell "ccjs all.js --externs=node --externs=all.js.externs > all.min.js"
+    googleClosureCompiler ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js", "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js.externs"] "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js"
 
     "target/all.min.js" %> \out -> do
         need ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js"]

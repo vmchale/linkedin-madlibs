@@ -1,1 +1,2 @@
 compiler: ghcjs
+constraints: network < 2.7
