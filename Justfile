@@ -7,7 +7,7 @@ build:
 script:
     @mkdir -p .shake
     @cp shake.hs .shake
-    cd .shake && ghc -O2 shake.hs -o build
+    cd .shake && ghc -Wall -Werror -O2 shake.hs -o build
     @mv .shake/build .
 
 deploy: build
