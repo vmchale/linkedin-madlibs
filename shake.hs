@@ -39,16 +39,16 @@ main = shakeArgs shakeOptions { shakeFiles = ".shake", shakeLint = Just LintBasi
         removeFilesAfter ".shake" ["//*"]
         removeFilesAfter "target" ["//*"]
 
-    ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js.externs", "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js"] &%> \_ -> do
+    ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js.externs", "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js"] &%> \_ -> do
         need ["src/Lib.hs","linkedin-madlibs.cabal","cabal.project.local","mad-src/linkedin-madlibs.mad"]
         unit $ cmd ["bash", "-c", "madlang check mad-src/linkedin-madlibs.mad > /dev/null"]
         cmd ["cabal", "new-build"]
 
-    googleClosureCompiler ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js", "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js.externs"] "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js"
+    googleClosureCompiler ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js", "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js.externs"] "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js"
 
     "target/all.min.js" %> \out -> do
-        need ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js"]
-        copyFile' "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js" out
+        need ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js"]
+        copyFile' "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js" out
 
     "target/styles.css" %> \out -> do
         liftIO $ createDirectoryIfMissing True "target"
