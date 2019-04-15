@@ -1,3 +1,9 @@
+#!/usr/bin/env cabal
+{- cabal:
+build-depends: base, shake, shake-cabal, shake-google-closure-compiler, shake-ext, directory
+default-language: Haskell2010
+-}
+
 import           Development.Shake
 import           Development.Shake.Cabal
 import           Development.Shake.ClosureCompiler
@@ -35,7 +41,7 @@ main = shakeArgs shakeOptions { shakeFiles = ".shake", shakeLint = Just LintBasi
 
     ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js.externs", "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js"] &%> \_ -> do
         need . snd =<< getCabalDepsA "linkedin-madlibs.cabal"
-        cmd ["cabal", "new-build"]
+        cmd ["cabal", "new-build", "--ghcjs"]
 
     googleClosureCompiler ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js", "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.js.externs"] "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js"
 

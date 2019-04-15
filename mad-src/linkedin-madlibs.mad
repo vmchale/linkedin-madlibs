@@ -25,6 +25,7 @@
     0.6 "correcting other people's typos"
     1.0 "quora"
     1.0 "blogging"
+    1.0 "functional programming"
 
 :define insufferable-drug
     1.0 "psilocybin mushrooms"
@@ -70,6 +71,7 @@
     1.0 "data mining"
     1.0 "coding"
     1.1 "coding in " text-editor
+    1.0 "making a cup of tea"
 
 :return
     1.0 "What " hobby.titlecase " Taught Me About " buzzword.titlecase
