@@ -2,7 +2,7 @@
 {- cabal:
 build-depends: base, shake, shake-cabal, shake-google-closure-compiler, shake-ext, directory, strict
 default-language: Haskell2010
-ghc-options: -Wall
+ghc-options: -Wall -Wincomplete-uni-patterns -Wincomplete-record-updates -Wredundant-constraints
 -}
 
 import           Development.Shake
