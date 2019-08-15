@@ -1,6 +1,6 @@
 #!/usr/bin/env cabal
 {- cabal:
-build-depends: base, shake, shake-cabal, shake-google-closure-compiler, shake-ext, directory, strict
+build-depends: base, shake, shake-cabal, shake-google-closure-compiler, shake-ext, shake-minify-css, directory, strict
 default-language: Haskell2010
 ghc-options: -Wall -Wincomplete-uni-patterns -Wincomplete-record-updates -Wredundant-constraints
 -}
@@ -9,6 +9,7 @@ import           Development.Shake
 import           Development.Shake.Cabal
 import           Development.Shake.ClosureCompiler
 import           Development.Shake.FileDetect
+import           Development.Shake.MinifyCSS
 import           System.Directory
 import qualified System.IO.Strict                  as Strict
 
@@ -50,10 +51,7 @@ main = shakeArgs shakeOptions { shakeFiles = ".shake", shakeLint = Just LintBasi
         need ["dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js"]
         copyFile' "dist-newstyle/build/x86_64-linux/ghcjs-0.2.1.9008011/linkedin-madlibs-0.1.0.0/x/linkedin-madlibs/opt/build/linkedin-madlibs/linkedin-madlibs.jsexe/all.min.js" out
 
-    "target/styles.css" %> \out -> do
-        liftIO $ createDirectoryIfMissing True "target"
-        need ["web-src/styles.css"]
-        copyFile' "web-src/styles.css" out
+    minifyCSSRules "web-src/styles.css" "target/styles.css"
 
     "target/index.html" %> \out -> do
         need ["target/all.min.js", "target/styles.css"]
