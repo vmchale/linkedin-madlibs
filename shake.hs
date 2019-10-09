@@ -10,7 +10,6 @@ import           Development.Shake.Cabal
 import           Development.Shake.ClosureCompiler
 import           Development.Shake.FileDetect
 import           Development.Shake.MinifyCSS
-import           System.Directory
 import qualified System.IO.Strict                  as Strict
 
 main :: IO ()
