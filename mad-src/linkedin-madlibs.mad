@@ -25,12 +25,14 @@
     0.6 "correcting other people's typos"
     1.0 "quora"
     1.0 "blogging"
+    1.0 "electric scooters"
     1.0 "functional programming"
 
 :define insufferable-drug
     1.0 "psilocybin mushrooms"
     0.66 "LSD"
     0.5 "MDMA"
+    0.01 "ibogaine"
 
 :define text-editor
     1.0 "atom"
@@ -56,6 +58,7 @@
     1.5 "MongoDB"
     1.0 "smart contracts"
     1.0 "serverless architecture"
+    1.5 "monads"
     1.0 "kubernetes"
     1.0 "containerization"
     1.0 "disruption"
