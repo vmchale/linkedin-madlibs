@@ -12,8 +12,8 @@
     1.0 "organic juice"
     1.0 "hackathons"
     0.7 "mountain biking"
-    1.0 "tweeting"
-    1.0 "a wine tasting"
+    1.0 "using twitter"
+    1.0 "wine tasting"
     0.4 "golfing"
     1.0 "using tinder in LA"
     1.0 "gaming"
@@ -22,7 +22,6 @@
     0.5 "rowing"
     1.0 insufferable-drug
     1.0 "wearing patagonia socks"
-    0.6 "correcting other people's typos"
     1.0 "quora"
     1.0 "blogging"
     1.0 "electric scooters"
@@ -32,7 +31,6 @@
     1.0 "psilocybin mushrooms"
     0.66 "LSD"
     0.5 "MDMA"
-    0.01 "ibogaine"
 
 :define text-editor
     1.0 "atom"
@@ -47,7 +45,7 @@
     1.0 "machine learning"
     1.0 "data science"
     1.6 "the cloud"
-    1.0 "design principles"
+    1.0 "design patterns"
     1.0 "the linux desktop"
     1.0 "being a thought leader"
     1.0 "microkernels"
@@ -58,6 +56,7 @@
     1.5 "MongoDB"
     1.0 "smart contracts"
     1.0 "serverless architecture"
+    1.5 "microservices"
     1.5 "monads"
     1.0 "kubernetes"
     1.0 "containerization"
