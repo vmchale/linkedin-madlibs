@@ -14,6 +14,7 @@
     0.7 "mountain biking"
     1.0 "using twitter"
     1.0 "wine tasting"
+    0.8 "scrum"
     0.4 "golfing"
     1.0 "using tinder in LA"
     1.0 "gaming"
@@ -74,6 +75,7 @@
     1.0 "coding"
     1.1 "coding in " text-editor
     1.0 "making a cup of tea"
+    1.0 "climate change"
 
 :return
     1.0 "What " hobby.titlecase " Taught Me About " buzzword.titlecase
