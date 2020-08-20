@@ -35,6 +35,7 @@ main = startApp App {..}
     events = defaultEvents
     subs   = [ keyboardSub keypress ]
     mountPoint = Nothing
+    logLevel = Off
 
 backgroundStyle :: [Attribute action]
 backgroundStyle = [ style_ $ M.fromList [("color", "#4d4d4d"), ("margin-left", "15%"), ("margin-top", "15%") ] ]
